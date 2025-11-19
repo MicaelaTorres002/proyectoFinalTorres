@@ -61,3 +61,8 @@ catalogo[6].productos.push(
 console.log(catalogo);
 
 localStorage.setItem("lista de productos", JSON.stringify(catalogo))
+
+// funcion para que el carrito del cliente se quede guardado
+
+// let carrito = JSON.parse(localStorage.getItem("carritoUsuario")) || [];
+// console.log (carrito);
