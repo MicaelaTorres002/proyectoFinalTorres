@@ -1,0 +1,20 @@
+[
+    {
+        "categoria": "vino",
+        "nombre": "Crotta patero tinto",
+        "precio": 9000,
+        "volumen": "1.125 lt"
+    },
+    {
+        "categoria": "cerveza",
+        "nombre": "Andes Origen IPA pack x6 latas",
+        "precio": 12000,
+        "volumen": "473 ml"
+    },
+    {
+        "categoria": "whisky",
+        "nombre": "Chivas Regal Royal Salute Whisky 21 Años escocés",
+        "precio": 255000,
+        "volumen": "700 ml"
+    }
+]

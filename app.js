@@ -62,7 +62,19 @@ console.log(catalogo);
 
 localStorage.setItem("lista de productos", JSON.stringify(catalogo))
 
-// funcion para que el carrito del cliente se quede guardado
 
-// let carrito = JSON.parse(localStorage.getItem("carritoUsuario")) || [];
-// console.log (carrito);
+fetch("./data/datos.json")
+  .then(res => res.json())
+  .then(data => {
+      data.forEach(item => {
+          const bebida = new Bebida(item.nombre, item.precio, item.volumen);
+
+          const categoriaObj = catalogo.find(c => c.categoria === item.categoria);
+          if (categoriaObj) {
+              categoriaObj.productos.push(bebida);
+          }
+      });
+
+      console.log(catalogo);
+  });
+
