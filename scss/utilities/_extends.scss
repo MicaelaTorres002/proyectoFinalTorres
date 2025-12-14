@@ -1,0 +1,14 @@
+@use "./_variables" as v;
+
+%botones {
+
+    background-color: v.$color-terciario-alpha;
+    padding: 0.5rem 1rem;
+    border: none;
+    width: 100%;
+    border-radius: 0.5rem;
+    transition: transform 0.5s;
+    &:hover {
+        transform: scale(1.05);
+    }
+}

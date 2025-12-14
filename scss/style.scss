@@ -1,5 +1,16 @@
-@forward "utilities/extends";
-@forward "layout/header";
-@forward "layout/footer";
-@forward "layout/main";
-@forward "mq/mq";
+@forward "./utilities/_variables";
+@forward "./utilities/_extends";
+@forward "./layout/_header";
+@forward "./layout/footer";
+@forward "./layout/main";
+@forward "./layout/mq";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.boton {
+    @extend %botones;
+}

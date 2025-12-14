@@ -1,3 +1,5 @@
+         /* CATALOGO */
+
 const catalogo = [
     {
         categoria: "noAlcoholica",
@@ -77,4 +79,35 @@ fetch("./data/datos.json")
 
       console.log(catalogo);
   });
+
+         /* DOM */
+
+  let primerArticulo = document.querySelector('article');
+
+  primerArticulo.className = 'articleCard';
+
+         /* CARD */
+
+const contenedor = document.getElementById("contenedor-productos");
+
+catalogo.forEach(categoria => {
+  categoria.productos.forEach(producto => {
+
+    const card = document.createElement("article");
+    card.classList.add("articleCard");
+
+    card.innerHTML = `
+      <h3>${producto.nombre}</h3>
+      <p>Volumen: ${producto.volumen}</p>
+      <p>Precio: $${producto.precio}</p>
+      <button class="boton">Agregar al carrito</button>
+    `;
+
+    contenedor.appendChild(card);
+  });
+});
+
+
+
+
 

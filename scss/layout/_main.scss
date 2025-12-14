@@ -1,4 +1,9 @@
-.card-producto {
-    max-width: 1rem;
-    background-color: black;
+@use "../utilities/_variables" as v;
+
+.articleCard {
+    max-width: 18rem;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: v.$color-primario;
+    border-radius: 0.5rem;
 }
