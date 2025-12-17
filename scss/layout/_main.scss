@@ -7,3 +7,17 @@
     background-color: v.$color-primario;
     border-radius: 0.5rem;
 }
+
+.carrito-container {
+  margin: 2rem;
+  padding: 1rem;
+  border: v.$color-bg-alpha;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.carrito-item {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.5rem;
+}

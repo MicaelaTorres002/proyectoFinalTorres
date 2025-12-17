@@ -20,7 +20,7 @@ const catalogo = [
     {
         categoria: "licor",
         productos:[]
-    },
+    }, 
     {
         categoria: "bebidasBlancas",
         productos:[]
@@ -32,9 +32,9 @@ const catalogo = [
 ];
 
 function Bebida(nombre, precio, volumen) {
-  this.nombre = nombre;
-  this.precio = precio;
-  this.volumen = volumen;
+    this.nombre = nombre;
+    this.precio = precio;
+    this.volumen = volumen;
 }
 
 catalogo[0].productos.push(
@@ -60,52 +60,104 @@ catalogo[6].productos.push(
     new Bebida ("Fernet Branca", 16000, "750 ml" )
 );
 
-console.log(catalogo);
-
-localStorage.setItem("lista de productos", JSON.stringify(catalogo))
-
-
-fetch("./data/datos.json")
-  .then(res => res.json())
-  .then(data => {
-      data.forEach(item => {
-          const bebida = new Bebida(item.nombre, item.precio, item.volumen);
-
-          const categoriaObj = catalogo.find(c => c.categoria === item.categoria);
-          if (categoriaObj) {
-              categoriaObj.productos.push(bebida);
-          }
-      });
-
-      console.log(catalogo);
-  });
-
-         /* DOM */
-
-  let primerArticulo = document.querySelector('article');
-
-  primerArticulo.className = 'articleCard';
-
-         /* CARD */
-
-const contenedor = document.getElementById("contenedor-productos");
+let idGlobal = 1;
 
 catalogo.forEach(categoria => {
   categoria.productos.forEach(producto => {
+    producto.id = idGlobal++;
+  });
+});
+
+console.log(catalogo);
+
+localStorage.setItem("lista de productos", JSON.stringify(catalogo));
+
+         /* fetch */
+
+// const llamadoAlServidor = async () => {
+//     let data = await llamada.json();
+//     let llamada = await 
+fetch("../data/datos.json")
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(item => {
+            const bebida = new Bebida(item.nombre, item.precio, item.volumen);
+    
+            const categoriaObj = catalogo.find(c => c.categoria ===item.categoria);
+            if (categoriaObj) {
+                categoriaObj.productos.push(bebida);
+            }
+        });
+        console.log(catalogo);
+    });
+// };
+
+function obtenerTodosLosProductos() {
+  return catalogo.flatMap(cat => cat.productos);
+}
+
+let carrito = [];
+
+function agregarAlCarrito(id) {
+    const productos = obtenerTodosLosProductos();
+    const producto = productos.find(p => p.id === Number(id));
+
+    carrito.push(producto);
+    console.log("Carrito:", carrito);
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    renderCarrito();
+}
+
+function renderCarrito() {
+    const contenedorCarrito = document.getElementById("carrito-items");
+    const totalHTML = document.getElementById("carrito-total");
+
+    contenedorCarrito.innerHTML = "";
+    let total = 0;
+
+    carrito.forEach(producto => {
+      const div = document.createElement("div");
+      div.classList.add("carrito-item");
+
+      div.innerHTML = `
+        <span>${producto.nombre}</span>
+        <span>$${producto.precio}</span>
+      `;
+
+      contenedorCarrito.appendChild(div);
+      total += producto.precio;
+    });
+
+    totalHTML.textContent = `Total: $${total}`;
+}
+
+const contenedor = document.getElementById("contenedor-productos");
+
+
+catalogo.forEach(categoria => {
+    categoria.productos.forEach(producto => {
 
     const card = document.createElement("article");
     card.classList.add("articleCard");
 
     card.innerHTML = `
-      <h3>${producto.nombre}</h3>
-      <p>Volumen: ${producto.volumen}</p>
-      <p>Precio: $${producto.precio}</p>
-      <button class="boton">Agregar al carrito</button>
-    `;
+        <h3>${producto.nombre}</h3>
+        <p>Volumen: ${producto.volumen}</p>
+        <p>Precio: ${producto.precio}</p>
+        <button class="boton boton-agregar" data-id=${producto.id}>Agregar al carrito</button>`;
+    
+    const boton = card.querySelector(".boton-agregar");
+    boton.addEventListener("click", (e) => {
+        agregarAlCarrito (e.target.dataset.id);
+    });
 
     contenedor.appendChild(card);
   });
 });
+
+
+
 
 
 

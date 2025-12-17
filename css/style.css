@@ -1,4 +1,4 @@
-.boton {
+.botones {
   background-color: rgb(163, 14, 14);
   padding: 0.5rem 1rem;
   border: none;
@@ -6,7 +6,7 @@
   border-radius: 0.5rem;
   transition: transform 0.5s;
 }
-.boton:hover {
+.botones:hover {
   transform: scale(1.05);
 }
 
@@ -21,6 +21,20 @@
   margin: 1rem;
   background-color: rgb(117, 9, 121);
   border-radius: 0.5rem;
+}
+
+.carrito-container {
+  margin: 2rem;
+  padding: 1rem;
+  border: rgb(180, 180, 180);
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.carrito-item {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.5rem;
 }
 
 * {
