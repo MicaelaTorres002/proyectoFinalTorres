@@ -1,5 +1,3 @@
-         /* CATALOGO */
-
 const catalogo = [
     {
         categoria: "noAlcoholica",
@@ -68,15 +66,8 @@ catalogo.forEach(categoria => {
   });
 });
 
-console.log(catalogo);
-
 localStorage.setItem("lista de productos", JSON.stringify(catalogo));
 
-         /* fetch */
-
-// const llamadoAlServidor = async () => {
-//     let data = await llamada.json();
-//     let llamada = await 
 fetch("../data/datos.json")
     .then(res => res.json())
     .then(data => {
@@ -90,7 +81,6 @@ fetch("../data/datos.json")
         });
         console.log(catalogo);
     });
-// };
 
 function obtenerTodosLosProductos() {
   return catalogo.flatMap(cat => cat.productos);
@@ -103,7 +93,6 @@ function agregarAlCarrito(id) {
     const producto = productos.find(p => p.id === Number(id));
 
     carrito.push(producto);
-    console.log("Carrito:", carrito);
 
     localStorage.setItem("carrito", JSON.stringify(carrito));
     renderCarrito();
@@ -148,8 +137,18 @@ catalogo.forEach(categoria => {
         <button class="boton boton-agregar" data-id=${producto.id}>Agregar al carrito</button>`;
     
     const boton = card.querySelector(".boton-agregar");
+
     boton.addEventListener("click", (e) => {
         agregarAlCarrito (e.target.dataset.id);
+
+        Swal.fire({
+            title: "Producto agregado al carrito",
+            text: `${producto.nombre}`,
+            icon: "success",
+            draggable: true,
+            showConfirmButton: false,
+            timer: 1500
+        });
     });
 
     contenedor.appendChild(card);
